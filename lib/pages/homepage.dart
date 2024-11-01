@@ -84,34 +84,58 @@ class _HomePageState extends State<HomePage> {
                   // get note in doc
                   Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                   String topicText = data['topic'];
+                  // get upvotes
+                  int upvotes = data['upvotes'];
+                  // get downvots
+                  int downvotes = data['downvotes'];
 
                   // display as list tile
-                  return ListTile(
-                    title: Text(topicText),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // upvote button
-                        IconButton(
-                          onPressed: () => firestoreService.upvoteTopic(docID),
-                          icon: const Icon(Icons.arrow_upward),
-                          ),
-                        // downvote button
-                        IconButton(
-                          onPressed: () => firestoreService.downvoteTopic(docID),
-                          icon: const Icon(Icons.arrow_downward),
-                        ),
-                        // update button
-                        IconButton(
-                          onPressed: () => openTopicBox(docID: docID), 
-                          icon: const Icon(Icons.settings),
-                        ),
-                      // delete button
-                        IconButton(
-                          onPressed: () => firestoreService.deleteTopic(docID), 
-                          icon: const Icon(Icons.delete),
-                        ),
-                    ])
+                  return SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: ListTile(
+                      title: Text(topicText),
+                      trailing: SizedBox(
+                        height: 100,
+                        width: 400,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // upvote button
+                            IconButton(
+                              onPressed: () => firestoreService.upvoteTopic(docID),
+                              icon: const Icon(Icons.arrow_upward),
+                              ),
+                            // upvotes
+                            TextField(
+                              readOnly: true,
+                              controller: TextEditingController(text: upvotes.toString()),
+                            ),
+                            // downvote button
+                            IconButton(
+                              onPressed: () => firestoreService.downvoteTopic(docID),
+                              icon: const Icon(Icons.arrow_downward),
+                            ),
+                            // downvotes
+                            TextField(
+                              readOnly: true,
+                              controller: TextEditingController(text: downvotes.toString()),
+                            ),
+                            // update button
+                            IconButton(
+                              onPressed: () => openTopicBox(docID: docID), 
+                              icon: const Icon(Icons.settings),
+                            ),
+                          // delete button
+                            IconButton(
+                              onPressed: () => firestoreService.deleteTopic(docID), 
+                              icon: const Icon(Icons.delete),
+                            ),
+                        ]),
+                      )
+                    ),
                   );
                 },
               );

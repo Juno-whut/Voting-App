@@ -50,4 +50,5 @@ class FirestoreService {
       'downvotes': FieldValue.increment(1)
     });
   }
+
 }
