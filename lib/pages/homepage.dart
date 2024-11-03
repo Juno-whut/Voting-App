@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text(topicText),
                       trailing: SizedBox(
                         height: 100,
-                        width: 400,
+                        width: 250,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,20 +109,14 @@ class _HomePageState extends State<HomePage> {
                               icon: const Icon(Icons.arrow_upward),
                               ),
                             // upvotes
-                            TextField(
-                              readOnly: true,
-                              controller: TextEditingController(text: upvotes.toString()),
-                            ),
+                            Text(upvotes.toString()),
                             // downvote button
                             IconButton(
                               onPressed: () => firestoreService.downvoteTopic(docID),
                               icon: const Icon(Icons.arrow_downward),
                             ),
                             // downvotes
-                            TextField(
-                              readOnly: true,
-                              controller: TextEditingController(text: downvotes.toString()),
-                            ),
+                            Text(downvotes.toString()),
                             // update button
                             IconButton(
                               onPressed: () => openTopicBox(docID: docID), 
